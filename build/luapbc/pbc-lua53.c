@@ -868,8 +868,7 @@ _add_rmessage(lua_State *L) {
 	return 0;
 }
 
-int
-luaopen_protobuf_c(lua_State *L) {
+__declspec(dllexport) int luaopen_protobuf_c(lua_State *L){
 	luaL_Reg reg[] = {
 		{"_env_new" , _env_new },
 		{"_env_register" , _env_register },
