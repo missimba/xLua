@@ -106,6 +106,37 @@ set ( LUA_SOCKET
     luasocket/udp.c 
 )
 
+#begin lua-protobuf
+# 添加所有的c或者cpp文件
+set (PROTOBUF_SRC
+ luapbc/alloc.c
+ luapbc/array.c
+ luapbc/bootstrap.c
+ luapbc/context.c
+ luapbc/decode.c
+ luapbc/map.c
+ luapbc/pbc-lua53.c
+ luapbc/proto.c
+ luapbc/register.c
+ luapbc/rmessage.c
+ luapbc/stringpool.c
+ luapbc/varint.c
+ luapbc/wmessage.c
+ luapbc/pattern.c
+)
+set_property(
+ SOURCE ${PROTOBUF_SRC}
+ APPEND
+ PROPERTY COMPILE_DEFINITIONS
+ LUA_LIB
+)
+
+# 头文件目录
+list(APPEND THIRDPART_INC  lua-protobuf)
+set (THIRDPART_SRC ${THIRDPART_SRC} ${PROTOBUF_SRC})
+#end lua-protobuf
+
+
 if ( WIN32 AND NOT CYGWIN )
     list (APPEND LUA_SOCKET luasocket/wsocket.c)
 else ( )
