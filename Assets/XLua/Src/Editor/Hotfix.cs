@@ -1,4 +1,4 @@
-﻿/*
+/*
  * Tencent is pleased to support the open source community by making xLua available.
  * Copyright (C) 2016 THL A29 Limited, a Tencent company. All rights reserved.
  * Licensed under the MIT License (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at
@@ -1722,6 +1722,13 @@ namespace XLua
                     args[2] = CSObjectWrapEditor.GeneratorConfig.common_path + "Resources/hotfix_id_map_" + injectAssemblyFileName.Substring(0, injectAssemblyFileName.Length - 4) + ".lua.txt";
                     idMapFileNames.Add(args[2]);
                 }
+
+                string oldArg1 = null;
+                if (args[0].EndsWith("\\Assembly-CSharp.dll"))
+                {
+                    oldArg1 = args[1];
+                    args[1] = args[0];
+                }
                 Process hotfix_injection = new Process();
                 hotfix_injection.StartInfo.FileName = mono_path;
 #if UNITY_5_6_OR_NEWER
@@ -1736,6 +1743,14 @@ namespace XLua
                 hotfix_injection.Start();
                 UnityEngine.Debug.Log(hotfix_injection.StandardOutput.ReadToEnd());
                 hotfix_injection.WaitForExit();
+
+                if (oldArg1!=null)
+                {
+                    args[1] = oldArg1;
+                    oldArg1 = null;
+                }
+
+
             }
 
             File.Delete(hotfix_cfg_in_editor);
