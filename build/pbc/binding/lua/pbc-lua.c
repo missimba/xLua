@@ -32,12 +32,7 @@ extern "C" {
 #if LUA_VERSION_NUM == 501
 
 #define lua_rawlen lua_objlen
-
-#ifdef luaL_newlib
-#undef luaL_newlib
 #define luaL_newlib(L ,reg) luaL_register(L,"protobuf.c",reg)
-#endif
-
 #define luaL_buffinit(L , _ ) 
 #define luaL_prepbuffsize( b , cap ) malloc(cap)
 #define _Free(p) free(p)
