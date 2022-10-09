@@ -125,9 +125,9 @@ set (PROTOBUF_SRC
 )
 
 if (USING_LUAJIT)
-	list(APPEND PROTOBUF_SRC pbc luapbc/pbc-lua.c)
+	list(APPEND PROTOBUF_SRC luapbc luapbc/pbc-lua.c)
 else ()
-	list(APPEND PROTOBUF_SRC pbc  luapbc/pbc-lua53.c)
+	list(APPEND PROTOBUF_SRC luapbc  luapbc/pbc-lua53.c)
 endif ()
 
 set_property(
