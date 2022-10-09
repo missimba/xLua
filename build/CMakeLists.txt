@@ -124,12 +124,8 @@ set (PBC_SRC
 	pbc/src/wmessage.c
 )
  
-if (USING_LUAJIT)
-	list(APPEND PBC_SRC pbc pbc/binding/lua/pbc-lua.c)
-else ()
-	list(APPEND PBC_SRC pbc pbc/binding/lua53/pbc-lua53.c)
-endif ()
- 
+
+ list(APPEND PBC_SRC pbc pbc/binding/lua53/pbc-lua53.c)
 set_property(
 	SOURCE ${PBC_SRC}
 	APPEND
