@@ -124,6 +124,13 @@ set (PROTOBUF_SRC
  luapbc/wmessage.c
  luapbc/pattern.c
 )
+
+if (USING_LUAJIT)
+	list(APPEND PBC_SRC pbc pbc/binding/lua/pbc-lua.c)
+else ()
+	list(APPEND PBC_SRC pbc pbc/binding/lua53/pbc-lua53.c)
+endif ()
+
 set_property(
  SOURCE ${PROTOBUF_SRC}
  APPEND
