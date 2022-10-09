@@ -22,18 +22,12 @@ jobs:
         run: |
           cd build
           ./make_android_lua53.sh
-           sudo apt install gcc-multilib
-          ./make_android_luajit_arm64.sh
       - name: Upload53
         uses: actions/upload-artifact@v2
         with:
           path: ./build/plugin_lua53/**/*
           name: plugin_lua53   
-      - name: UploadJit
-        uses: actions/upload-artifact@v2
-        with:
-          path: ./build/plugin_luajit/**/*
-          name: plugin_luajit
+  
   ios:
     runs-on: macos-latest
 
