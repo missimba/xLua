@@ -33,7 +33,8 @@ extern "C" {
 
 #define lua_rawlen lua_objlen
 
-#ifndef luaL_newlib
+#ifdef luaL_newlib
+#undef luaL_newlib
 #define luaL_newlib(L ,reg) luaL_register(L,"protobuf.c",reg)
 #endif
 
