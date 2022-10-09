@@ -106,41 +106,39 @@ set ( LUA_SOCKET
     luasocket/udp.c 
 )
 
-#begin lua-protobuf
-# 添加所有的c或者cpp文件
-set (PROTOBUF_SRC
- luapbc/alloc.c
- luapbc/array.c
- luapbc/bootstrap.c
- luapbc/context.c
- luapbc/decode.c
- luapbc/map.c
- luapbc/proto.c
- luapbc/register.c
- luapbc/rmessage.c
- luapbc/stringpool.c
- luapbc/varint.c
- luapbc/wmessage.c
- luapbc/pattern.c
+#begin pbc
+set (PBC_SRC 
+	pbc/src/alloc.c
+	pbc/src/array.c
+	pbc/src/array.c
+	pbc/src/bootstrap.c
+	pbc/src/context.c
+	pbc/src/decode.c
+	pbc/src/map.c
+	pbc/src/pattern.c
+	pbc/src/proto.c
+	pbc/src/register.c
+	pbc/src/rmessage.c
+	pbc/src/stringpool.c
+	pbc/src/varint.c
+	pbc/src/wmessage.c
 )
-
+ 
 if (USING_LUAJIT)
-	list(APPEND PROTOBUF_SRC luapbc luapbc/pbc-lua.c)
+	list(APPEND PBC_SRC pbc pbc/binding/lua/pbc-lua.c)
 else ()
-	list(APPEND PROTOBUF_SRC luapbc  luapbc/pbc-lua53.c)
+	list(APPEND PBC_SRC pbc pbc/binding/lua53/pbc-lua53.c)
 endif ()
-
+ 
 set_property(
- SOURCE ${PROTOBUF_SRC}
- APPEND
- PROPERTY COMPILE_DEFINITIONS
- LUA_LIB
+	SOURCE ${PBC_SRC}
+	APPEND
+	PROPERTY COMPILE_DEFINITIONS
+	LUA_LIB
 )
-
-# 头文件目录
-list(APPEND THIRDPART_INC  lua-protobuf)
-set (THIRDPART_SRC ${THIRDPART_SRC} ${PROTOBUF_SRC})
-#end lua-protobuf
+list(APPEND THIRDPART_INC pbc pbc/src)
+set (THIRDPART_SRC ${THIRDPART_SRC} ${PBC_SRC})
+#end pbc
 
 
 if ( WIN32 AND NOT CYGWIN )
