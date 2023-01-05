@@ -1,6 +1,6 @@
-if [ -z "$ANDROID_NDK" ]; then
+#if [ -z "$ANDROID_NDK" ]; then
     export ANDROID_NDK=~/android-ndk-r15c
-fi
+#fi
 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 SRCDIR=$DIR/luajit-2.1.0b3
@@ -65,4 +65,3 @@ cd "$DIR"
 cmake --build build_lj_x86 --config Release
 mkdir -p plugin_luajit/Plugins/Android/libs/x86/
 cp build_lj_x86/libxlua.so plugin_luajit/Plugins/Android/libs/x86/libxlua.so
-
